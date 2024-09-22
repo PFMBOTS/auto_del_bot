@@ -3,7 +3,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from bot import Bot
-from config import ADMINS, LINKSHORTX_API
+from config import *
 from helper_func import encode, get_message_id
 from pyshorteners import Shortener
 import aiohttp
