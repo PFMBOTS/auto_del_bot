@@ -63,13 +63,20 @@ async def start_command(client: Client, message: Message):
             return
         await temp_msg.delete()
 
-        for msg in messages:
-
-            if bool(CUSTOM_CAPTION) & bool(msg.document):
-                caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
+         for msg in messages:
+            if bool(CUSTOM_CAPTION) and (bool(msg.document) or bool(msg.video) or bool(msg.audio)):
+                filename = (
+                    msg.document.file_name if msg.document else 
+                    msg.video.file_name if msg.video else 
+                    msg.audio.file_name if msg.audio else ""
+                )
+                caption = CUSTOM_CAPTION.format(
+                    previouscaption="" if not msg.caption else msg.caption.html,
+                    filename=filename
+                )
             else:
                 caption = "" if not msg.caption else msg.caption.html
-
+                
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
@@ -128,12 +135,20 @@ async def not_joined(client: Client, message: Message):
         [
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3", url=client.invitelink3),
             InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4", url=client.invitelink4),
+        ],
+        [
+            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 5", url=client.invitelink3),
+            InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 6", url=client.invitelink4),
         ]
+<<<<<<< HEAD
         [
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 5", url=client.invitelink5),
             InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 6", url=client.invitelink46),
         ]
     ]
+=======
+      ]
+>>>>>>> 68ebbf70010c476c5d5346dddce70d896d736ebd
     try:
         buttons.append(
             [
